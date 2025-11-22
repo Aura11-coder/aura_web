@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AURA Institute & Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #F7BEC5 0%, #B65D63 100%);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .hero-text {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Put controls at bottom center */
+.swiper-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Pagination dots */
+.swiper-pagination {
+  position: static !important; /* use our flex layout */
+}
+
+/* Custom arrow buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  position: static !important; /* remove default absolute */
+  color: #B65D63;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 9999px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #B65D63;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+.swiper-pagination-bullet {
+  background: #ddd;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: #B65D63;
+}
+
+    </style>
+    <style>
+        /* Zoom-in animation for slides */
+        .swiper-slide {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .swiper-slide img,
+        .swiper-slide div {
+          transition: transform 4s ease-in-out;
+          transform: scale(1.1); /* Initial zoom */
+        }
+
+        .swiper-slide-active img,
+        .swiper-slide-active div {
+          transform: scale(1); /* Zoom out to normal when active */
+        }
+
+        /* Pagination dots styling */
+        .swiper-pagination-bullet {
+          background: #fff;
+          opacity: 0.7;
+        }
+        .swiper-pagination-bullet-active {
+          background: #D14B48;
+          opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html">
+                    <img alt="AURA Logo" class="h-24 w-auto md:h-28 max-w-full cursor-pointer"
+                         src="images/aura-logo.png">
+                </a>
+                <div class="text-3xl md:text-4xl font-bold text-[#B65D63]">
+                    <span class="text-[#DEA2A4]">AURA</span> Institute & Technology
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button class="text-gray-800 focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <a class="nav-link px-4 py-2 rounded-full text-gray-800 font-medium" data-page="home"
+                   href="#">Home</a>
+                <a class="nav-link px-4 py-2 rounded-full text-gray-800 font-medium" data-page="courses"
+                   href="#">Courses</a>
+                <a class="nav-link px-4 py-2 rounded-full text-gray-800 font-medium" data-page="about"
+                   href="#">About</a>
+                <a class="nav-link px-4 py-2 rounded-full text-gray-800 font-medium" data-page="faculty"
+                   href="#">Faculty</a>
+                <a class="nav-link px-4 py-2 rounded-full text-gray-800 font-medium" data-page="contact"
+                   href="#">Contact</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+            <a class="nav-link block px-4 py-2 rounded-full text-gray-800  text-center" data-page="home"
+               href="#">Home</a>
+            <a class="nav-link block px-4 py-2 rounded-full text-gray-800  text-center" data-page="courses"
+               href="#">Courses</a>
+            <a class="nav-link block px-4 py-2 rounded-full text-gray-800  text-center" data-page="about"
+               href="#">About</a>
+            <a class="nav-link block px-4 py-2 rounded-full text-gray-800  text-center" data-page="faculty"
+               href="#">Faculty</a>
+            <a class="nav-link block px-4 py-2 rounded-full text-gray-800  text-center" data-page="contact"
+               href="#">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container mx-auto px-6 py-10" id="content">
+
+</main>
+<a class="fixed bottom-6 left-6 bg-[#B65D63] text-white p-4 rounded-full shadow-lg hover:bg-[#D14B48] transition duration-300 z-20"
+   href="https://wa.me/917339044193"
+   target="_blank">
+    <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-2xl font-bold text-[#B65D63] mb-4">
+                    <span class="text-[#D14B48]">AURA</span> Institute & Technology
+                </h3>
+                <p class="text-gray-400">
+                    Empowering the next generation of tech professionals through quality education and practical
+                    training.
+                </p>
+            </div>
+
+            <!-- Footer Quick Links -->
+            <div>
+                <h4 class="font-bold text-white mb-2 ">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a class="footer-link text-gray-400 hover:text-[#B65D63]" footer-page="home" href="#">Home</a>
+                    </li>
+                    <li><a class="footer-link text-gray-400 hover:text-[#B65D63]" footer-page="courses"
+                           href="#">Courses</a></li>
+                    <li><a class="footer-link text-gray-400 hover:text-[#B65D63]" footer-page="about" href="#">About
+                        Us</a></li>
+                    <li><a class="footer-link text-gray-400 hover:text-[#B65D63]" footer-page="faculty"
+                           href="#">Faculty</a></li>
+                    <li><a class="footer-link text-gray-400 hover:text-[#B65D63]" footer-page="contact"
+                           href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 mb-4 md:mb-0">
+                &copy; 2023 AURA Institute & Technology. All rights reserved.
+            </p>
+            <div class="flex space-x-6">
+                <a class="text-gray-400 hover:text-[#B65D63] transition duration-300"
+                   href="https://youtube.com/@aurainstitutetechnology" rel="noopener noreferrer"
+                   target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a class="text-gray-400 hover:text-[#B65D63] transition duration-300"
+                   href="http://www.linkedin.com/in/aura-institute-and-technology-9a0446383"
+                   rel="noopener noreferrer"
+                   target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="text-gray-400 hover:text-[#B65D63] transition duration-300"
+                   href="https://www.instagram.com/aura_institute__technology" rel="noopener noreferrer"
+                   target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button class="opacity-0 pointer-events-none fixed bottom-6 right-6 bg-[#B65D63] text-white p-3 rounded-full shadow-lg hover:bg-[#DEA2A4] transition-opacity duration-500 z-30"
+        id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+
+<script>
+    const content = document.getElementById("content");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    // Load page content into #content
+    async function loadPage(page) {
+        try {
+            const response = await fetch(`${page}.html`);
+            if (!response.ok) throw new Error("Page not found");
+            const html = await response.text();
+            content.innerHTML = html;
+            initSwiper();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Highlight active nav links
+            document.querySelectorAll('[data-page]').forEach(link => {
+                if (!link.classList.contains("nav-link")) return;
+                link.classList.remove("bg-[#B65D63]", "text-white");
+                link.classList.add("text-gray-800", "hover:text-[#B65D63]");
+            });
+
+            document.querySelectorAll(`[data-page="${page}"]`).forEach(link => {
+                link.classList.add("bg-[#B65D63]", "text-white");
+                link.classList.remove("hover:text-[#B65D63]");
+            });
+
+            if (page === "contact") {
+  const form = content.querySelector("#contactForm");
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        mode: 'no-cors'
+      }).then(() => {
+        form.reset();
+        showSuccessPopup();
+      }).catch(() => {
+        alert("There was an error. Please try again later.");
+      });
+    });
+  }
+
+  // Show success popup
+  function showSuccessPopup() {
+    const popup = document.getElementById("successPopup");
+    popup.classList.remove("hidden");
+    popup.querySelector("div").classList.add("scale-100");
+  }
+
+  // Close popup
+  const closeBtn = document.getElementById("closePopup");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function() {
+      const popup = document.getElementById("successPopup");
+      popup.classList.add("hidden");
+    });
+  }
+}
+
+            // Close mobile menu if open
+            if (!mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+
+            // Attach event listeners again for new content (like home buttons)
+            content.querySelectorAll('[data-page]').forEach(link => {
+                link.addEventListener("click", e => {
+                    e.preventDefault();
+                    const page = link.getAttribute("data-page");
+                    loadPage(page);
+                    history.pushState({ page }, "", `#${page}`);
+                });
+            });
+
+        } catch (err) {
+            content.innerHTML = `<p class="text-red-600">Error loading ${page} page.</p>`;
+        }
+    }
+
+    // Handle nav clicks (desktop + mobile + footer)
+    function handleLinkClick(selector, attr) {
+        document.querySelectorAll(selector).forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                const page = link.getAttribute(attr);
+                loadPage(page);
+                history.pushState({ page }, "", `#${page}`);
+            });
+        });
+    }
+
+    handleLinkClick('[data-page]', "data-page");
+    handleLinkClick('[footer-page]', "footer-page");
+
+    // Load initial page
+    window.addEventListener("DOMContentLoaded", () => {
+        const defaultPage = location.hash.replace("#", "") || "home";
+        loadPage(defaultPage);
+    });
+
+    // Back/forward navigation
+    window.addEventListener("popstate", e => {
+        const page = e.state?.page || "home";
+        loadPage(page);
+    });
+
+    // Mobile menu toggle
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>
+<script>
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.add("opacity-100");
+      } else {
+        backToTopBtn.classList.remove("opacity-100");
+        backToTopBtn.classList.add("opacity-0", "pointer-events-none");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    function initSwiper() {
+      if (document.querySelector('.mySwiper')) {
+        var swiper = new Swiper(".mySwiper", {
+          speed: 1000,
+          parallax: true,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          simulateTouch: true,
+          grabCursor: true,
+          allowTouchMove: true,
+        });
+        const slider = document.querySelector(".mySwiper");
+
+        slider.addEventListener("click", (e) => {
+          const clickX = e.clientX;
+          const middle = window.innerWidth / 2;
+
+          if (clickX > middle) {
+            swiper.slideNext(); // Click right → next slide
+          } else {
+            swiper.slidePrev(); // Click left → previous slide
+          }
+        });
+      }
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const swiperContainer = document.querySelector(".mySwiper");
+      if (swiperContainer) {
+        const swiper = new Swiper(".mySwiper", {
+          loop: true,
+          speed: 1000,
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+          autoplay: { delay: 4000, disableOnInteraction: false },
+          pagination: { el: ".swiper-pagination", clickable: true },
+        });
+
+        swiperContainer.addEventListener("click", (e) => {
+          const rect = swiperContainer.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          if (x < rect.width / 2) swiper.slidePrev();
+          else swiper.slideNext();
+        });
+      }
+    });
+</script>
+</body>
+</html>
